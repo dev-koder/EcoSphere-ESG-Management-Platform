@@ -12,3 +12,8 @@ class EsgReward(models.Model):
         ('active', 'Active'),
         ('inactive', 'Inactive')
     ], string='Status', default='active')
+
+    _sql_constraints = [
+        ('points_required_positive', 'CHECK(points_required >= 0)', 'Points required cannot be negative.'),
+        ('stock_positive', 'CHECK(stock >= 0)', 'Reward stock cannot be negative.')
+    ]

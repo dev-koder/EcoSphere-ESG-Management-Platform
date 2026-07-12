@@ -34,7 +34,9 @@
         "data/esg_gamification_cron_data.xml",
         "views/res_config_settings_views.xml",
     ],
-    "demo": [],
+    "demo": [
+        "demo/esg_demo_data.xml",
+    ],
     "assets": {
         "web.assets_backend": [
             "ecosphere_esg/static/src/scss/esg_dashboard.scss",

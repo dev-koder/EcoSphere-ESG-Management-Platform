@@ -7,6 +7,11 @@ class EsgDepartment(models.Model):
     name = fields.Char(string='Name', required=True)
     code = fields.Char(string='Code')
     head_id = fields.Many2one('hr.employee', string='Department Head')
+    company_id = fields.Many2one('res.company', string='Company', default=lambda self: self.env.company)
+
+    _sql_constraints = [
+        ('code_uniq', 'unique(code)', 'Department code must be unique!')
+    ]
     parent_id = fields.Many2one('esg.department', string='Parent Department')
     employee_count = fields.Integer(string='Employee Count', compute='_compute_employee_count')
     status = fields.Selection([

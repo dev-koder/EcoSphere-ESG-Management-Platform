@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Demo Departments -->
+        <record id="demo_dept_it" model="esg.department">
+            <field name="name">Information Technology</field>
+            <field name="code">IT</field>
+        </record>
+        <record id="demo_dept_hr" model="esg.department">
+            <field name="name">Human Resources</field>
+            <field name="code">HR</field>
+        </record>
+        
+        <!-- Demo Employees -->
+        <record id="demo_emp_1" model="hr.employee">
+            <field name="name">Alice Smith</field>
+            <field name="department_id" ref="demo_dept_it"/>
+            <field name="gender">female</field>
+        </record>
+        <record id="demo_emp_2" model="hr.employee">
+            <field name="name">Bob Johnson</field>
+            <field name="department_id" ref="demo_dept_hr"/>
+            <field name="gender">male</field>
+        </record>
+
+        <!-- Demo Gamification -->
+        <record id="demo_badge_1" model="esg.badge">
+            <field name="name">Eco Warrior</field>
+            <field name="rule_type">total_xp</field>
+            <field name="threshold_value">100</field>
+        </record>
+        
+        <record id="demo_reward_1" model="esg.reward">
+            <field name="name">Extra Day Off</field>
+            <field name="points_required">500</field>
+            <field name="stock">5</field>
+        </record>
+
+        <record id="demo_challenge_1" model="esg.challenge">
+            <field name="title">Bike to Work Week</field>
+            <field name="xp">150</field>
+            <field name="difficulty">medium</field>
+            <field name="status">active</field>
+        </record>
+
+        <!-- Demo Goals -->
+        <record id="demo_goal_it" model="esg.environmental.goal">
+            <field name="name">Reduce IT Power Consumption</field>
+            <field name="department_id" ref="demo_dept_it"/>
+            <field name="metric_type">energy</field>
+            <field name="baseline_value">1000</field>
+            <field name="target_value">800</field>
+            <field name="target_date" eval="(DateTime.today() + relativedelta(months=6)).strftime('%Y-%m-%d')"/>
+        </record>
+    </data>
+</odoo>
