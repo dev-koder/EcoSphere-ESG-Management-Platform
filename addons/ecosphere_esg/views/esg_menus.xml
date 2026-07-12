@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Top-level Menu -->
+    <menuitem id="menu_esg_root" name="EcoSphere ESG" sequence="10"/>
+
+    <!-- App Actions (Placeholders for now) -->
+    <record id="action_esg_department" model="ir.actions.act_window">
+        <field name="name">Departments</field>
+        <field name="res_model">esg.department</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_esg_category" model="ir.actions.act_window">
+        <field name="name">Categories</field>
+        <field name="res_model">esg.category</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- App Menus -->
+    <menuitem id="menu_esg_department" name="Departments" parent="menu_esg_root" action="action_esg_department" sequence="20"/>
+    <menuitem id="menu_esg_category" name="Categories" parent="menu_esg_root" action="action_esg_category" sequence="30"/>
+</odoo>

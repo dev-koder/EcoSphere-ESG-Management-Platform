@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_esg_department_user,esg_department_user,model_esg_department,group_esg_user,1,0,0,0
+access_esg_department_manager,esg_department_manager,model_esg_department,group_esg_manager,1,1,1,1
+access_esg_category_user,esg_category_user,model_esg_category,group_esg_user,1,0,0,0
+access_esg_category_manager,esg_category_manager,model_esg_category,group_esg_manager,1,1,1,1

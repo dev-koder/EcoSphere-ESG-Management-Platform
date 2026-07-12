@@ -1,0 +1,18 @@
+// EcoSphere ESG Dashboard Design Tokens
+$esg-primary: #1B7A4B; // Forest green
+$esg-secondary: #0E5C73; // Deep teal
+$esg-accent: #E8A93B; // Amber/gold
+$esg-danger: #C4432B; // Risk/overdue
+
+$esg-neutral-light: #F7F9F8;
+$esg-neutral-dark: #1C2321;
+
+$esg-font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+$esg-spacing-unit: 8px;
+
+.esg-dashboard-container {
+    font-family: $esg-font-family;
+    background-color: $esg-neutral-light;
+    padding: $esg-spacing-unit * 2;
+    color: $esg-neutral-dark;
+}

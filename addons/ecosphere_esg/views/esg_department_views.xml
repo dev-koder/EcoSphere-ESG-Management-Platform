@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_esg_department_tree" model="ir.ui.view">
+        <field name="name">esg.department.tree</field>
+        <field name="model">esg.department</field>
+        <field name="arch" type="xml">
+            <tree string="Departments">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="head_id"/>
+                <field name="employee_count"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_esg_department_form" model="ir.ui.view">
+        <field name="name">esg.department.form</field>
+        <field name="model">esg.department</field>
+        <field name="arch" type="xml">
+            <form string="Department">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="head_id"/>
+                        </group>
+                        <group>
+                            <field name="parent_id"/>
+                            <field name="employee_count"/>
+                            <field name="status"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
