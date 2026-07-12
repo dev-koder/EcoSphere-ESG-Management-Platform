@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Emission Factors -->
+        <record id="ef_diesel" model="esg.emission.factor">
+            <field name="name">Diesel Fuel</field>
+            <field name="category">fuel</field>
+            <field name="scope">1</field>
+            <field name="uom">liter</field>
+            <field name="co2e_per_unit">2.68</field>
+            <field name="source">DEFRA 2024</field>
+        </record>
+        
+        <record id="ef_petrol" model="esg.emission.factor">
+            <field name="name">Petrol</field>
+            <field name="category">fuel</field>
+            <field name="scope">1</field>
+            <field name="uom">liter</field>
+            <field name="co2e_per_unit">2.31</field>
+            <field name="source">DEFRA 2024</field>
+        </record>
+        
+        <record id="ef_electricity_us" model="esg.emission.factor">
+            <field name="name">Grid Electricity (US Avg)</field>
+            <field name="category">electricity</field>
+            <field name="scope">2</field>
+            <field name="uom">kWh</field>
+            <field name="co2e_per_unit">0.38</field>
+            <field name="source">EPA 2024</field>
+        </record>
+        
+        <record id="ef_electricity_eu" model="esg.emission.factor">
+            <field name="name">Grid Electricity (EU Avg)</field>
+            <field name="category">electricity</field>
+            <field name="scope">2</field>
+            <field name="uom">kWh</field>
+            <field name="co2e_per_unit">0.25</field>
+            <field name="source">EEA 2024</field>
+        </record>
+        
+        <record id="ef_flight_short" model="esg.emission.factor">
+            <field name="name">Air Travel (Short Haul)</field>
+            <field name="category">travel</field>
+            <field name="scope">3</field>
+            <field name="uom">km</field>
+            <field name="co2e_per_unit">0.15</field>
+            <field name="source">DEFRA 2024</field>
+        </record>
+        
+        <record id="ef_flight_long" model="esg.emission.factor">
+            <field name="name">Air Travel (Long Haul)</field>
+            <field name="category">travel</field>
+            <field name="scope">3</field>
+            <field name="uom">km</field>
+            <field name="co2e_per_unit">0.10</field>
+            <field name="source">DEFRA 2024</field>
+        </record>
+        
+        <record id="ef_paper" model="esg.emission.factor">
+            <field name="name">Paper Purchases</field>
+            <field name="category">purchase</field>
+            <field name="scope">3</field>
+            <field name="uom">kg</field>
+            <field name="co2e_per_unit">0.9</field>
+            <field name="source">DEFRA 2024</field>
+        </record>
+        
+        <record id="ef_laptops" model="esg.emission.factor">
+            <field name="name">IT Equipment (Laptops)</field>
+            <field name="category">purchase</field>
+            <field name="scope">3</field>
+            <field name="uom">unit</field>
+            <field name="co2e_per_unit">350.0</field>
+            <field name="source">Industry Avg</field>
+        </record>
+        
+        <record id="ef_waste_landfill" model="esg.emission.factor">
+            <field name="name">General Waste (Landfill)</field>
+            <field name="category">waste</field>
+            <field name="scope">3</field>
+            <field name="uom">kg</field>
+            <field name="co2e_per_unit">0.45</field>
+            <field name="source">DEFRA 2024</field>
+        </record>
+        
+        <record id="ef_waste_recycled" model="esg.emission.factor">
+            <field name="name">Recycled Waste</field>
+            <field name="category">waste</field>
+            <field name="scope">3</field>
+            <field name="uom">kg</field>
+            <field name="co2e_per_unit">0.02</field>
+            <field name="source">DEFRA 2024</field>
+        </record>
+    </data>
+</odoo>

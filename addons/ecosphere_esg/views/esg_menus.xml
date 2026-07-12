@@ -17,6 +17,17 @@
     </record>
 
     <!-- App Menus -->
-    <menuitem id="menu_esg_department" name="Departments" parent="menu_esg_root" action="action_esg_department" sequence="20"/>
-    <menuitem id="menu_esg_category" name="Categories" parent="menu_esg_root" action="action_esg_category" sequence="30"/>
+    <menuitem id="menu_esg_environmental" name="Environmental" parent="menu_esg_root" sequence="10"/>
+    
+    <menuitem id="menu_esg_carbon_transaction" name="Carbon Transactions" parent="menu_esg_environmental" action="action_esg_carbon_transaction" sequence="10"/>
+    <menuitem id="menu_esg_environmental_dashboard" name="Environmental Dashboard" parent="menu_esg_environmental" action="action_esg_environmental_dashboard" sequence="20"/>
+    <menuitem id="menu_esg_environmental_goal" name="Sustainability Goals" parent="menu_esg_environmental" action="action_esg_environmental_goal" sequence="30"/>
+    <menuitem id="menu_esg_emission_factor" name="Emission Factors" parent="menu_esg_environmental" action="action_esg_emission_factor" sequence="40"/>
+    
+    <menuitem id="menu_esg_master_data" name="Master Data" parent="menu_esg_root" sequence="80"/>
+    <menuitem id="menu_esg_department" name="Departments" parent="menu_esg_master_data" action="action_esg_department" sequence="10"/>
+    <menuitem id="menu_esg_category" name="Categories" parent="menu_esg_master_data" action="action_esg_category" sequence="20"/>
+    
+    <menuitem id="menu_esg_configuration" name="Configuration" parent="menu_esg_root" sequence="100"/>
+    <menuitem id="menu_esg_settings" name="Settings" parent="menu_esg_configuration" action="action_esg_config_settings" sequence="10"/>
 </odoo>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Automation for Purchase Order -->
+        <record id="automation_po_carbon" model="base.automation">
+            <field name="name">ESG: Auto-create Carbon Transaction from Purchase</field>
+            <field name="model_id" ref="purchase.model_purchase_order"/>
+            <field name="trigger">on_write</field>
+            <field name="filter_pre_domain">[('state', '!=', 'purchase')]</field>
+            <field name="filter_domain">[('state', '=', 'purchase')]</field>
+            <field name="action_server_id" eval="False"/>
+        </record>
+
+        <record id="server_action_po_carbon" model="ir.actions.server">
+            <field name="name">ESG: Process PO for Carbon Transaction</field>
+            <field name="model_id" ref="purchase.model_purchase_order"/>
+            <field name="state">code</field>
+            <field name="code">
+auto_calc = env['ir.config_parameter'].sudo().get_param('ecosphere_esg.esg_auto_emission_calc')
+if auto_calc:
+    for record in records:
+        for line in record.order_line:
+            # We look for a matching factor based on product category for demo simplicity, 
+            # or you can use esg.product.profile.
+            # In a real system, you'd have a mapping. Here we use a fallback to 'Paper Purchases' for demo,
+            # or try to match exactly.
+            ef = env['esg.emission.factor'].search([('category', '=', 'purchase')], limit=1)
+            if ef:
+                env['esg.carbon.transaction'].create({
+                    'department_id': record.user_id.employee_id.department_id.id if record.user_id.employee_id else False,
+                    'source_module': 'purchase',
+                    'source_reference': '%s,%s' % ('purchase.order.line', line.id),
+                    'emission_factor_id': ef.id,
+                    'quantity': line.product_qty,
+                    'state': 'confirmed',
+                    'date': record.date_approve or fields.Date.context_today(record),
+                })
+            </field>
+        </record>
+        <record id="automation_po_carbon" model="base.automation">
+            <field name="action_server_id" ref="server_action_po_carbon"/>
+        </record>
+
+        <!-- Automation for HR Expense -->
+        <record id="automation_expense_carbon" model="base.automation">
+            <field name="name">ESG: Auto-create Carbon Transaction from Expense</field>
+            <field name="model_id" ref="hr_expense.model_hr_expense"/>
+            <field name="trigger">on_write</field>
+            <field name="filter_pre_domain">[('state', '!=', 'done')]</field>
+            <field name="filter_domain">[('state', '=', 'done')]</field>
+            <field name="action_server_id" eval="False"/>
+        </record>
+
+        <record id="server_action_expense_carbon" model="ir.actions.server">
+            <field name="name">ESG: Process Expense for Carbon Transaction</field>
+            <field name="model_id" ref="hr_expense.model_hr_expense"/>
+            <field name="state">code</field>
+            <field name="code">
+auto_calc = env['ir.config_parameter'].sudo().get_param('ecosphere_esg.esg_auto_emission_calc')
+if auto_calc:
+    for record in records:
+        # Match travel category
+        ef = env['esg.emission.factor'].search([('category', '=', 'travel')], limit=1)
+        if ef:
+            env['esg.carbon.transaction'].create({
+                'department_id': record.employee_id.department_id.id if record.employee_id else False,
+                'source_module': 'expense',
+                'source_reference': '%s,%s' % ('hr.expense', record.id),
+                'emission_factor_id': ef.id,
+                'quantity': record.quantity or 1.0,
+                'state': 'confirmed',
+                'date': record.date or fields.Date.context_today(record),
+            })
+            </field>
+        </record>
+        <record id="automation_expense_carbon" model="base.automation">
+            <field name="action_server_id" ref="server_action_expense_carbon"/>
+        </record>
+
+        <!-- Automation for Fleet -->
+        <record id="automation_fleet_carbon" model="base.automation">
+            <field name="name">ESG: Auto-create Carbon Transaction from Fleet Fuel</field>
+            <field name="model_id" ref="fleet.model_fleet_vehicle_log_fuel"/>
+            <field name="trigger">on_create</field>
+            <field name="filter_domain">[]</field>
+            <field name="action_server_id" eval="False"/>
+        </record>
+
+        <record id="server_action_fleet_carbon" model="ir.actions.server">
+            <field name="name">ESG: Process Fleet Fuel for Carbon Transaction</field>
+            <field name="model_id" ref="fleet.model_fleet_vehicle_log_fuel"/>
+            <field name="state">code</field>
+            <field name="code">
+auto_calc = env['ir.config_parameter'].sudo().get_param('ecosphere_esg.esg_auto_emission_calc')
+if auto_calc:
+    for record in records:
+        ef = env['esg.emission.factor'].search([('category', '=', 'fuel')], limit=1)
+        if ef:
+            env['esg.carbon.transaction'].create({
+                'department_id': record.purchaser_id.employee_id.department_id.id if record.purchaser_id and record.purchaser_id.employee_id else False,
+                'source_module': 'fleet',
+                'source_reference': '%s,%s' % ('fleet.vehicle.log.fuel', record.id),
+                'emission_factor_id': ef.id,
+                'quantity': record.liter or 1.0,
+                'state': 'confirmed',
+                'date': record.date or fields.Date.context_today(record),
+            })
+            </field>
+        </record>
+        <record id="automation_fleet_carbon" model="base.automation">
+            <field name="action_server_id" ref="server_action_fleet_carbon"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.esg</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="90"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app data-string="EcoSphere ESG" string="EcoSphere ESG" name="ecosphere_esg">
+                    <block title="Environmental" name="esg_environmental">
+                        <setting string="Auto Emission Calculation" help="Automatically create carbon transactions from purchase, expense, and fleet modules.">
+                            <field name="esg_auto_emission_calc"/>
+                        </setting>
+                    </block>
+                    <block title="Gamification &amp; Validation" name="esg_gamification">
+                        <setting string="Evidence Required" help="Require a proof document for CSR and Challenge participation.">
+                            <field name="esg_evidence_required"/>
+                        </setting>
+                        <setting string="Badge Auto-Award" help="Automatically award badges to employees upon hitting thresholds.">
+                            <field name="esg_badge_auto_award"/>
+                        </setting>
+                    </block>
+                    <block title="Score Weights" name="esg_score_weights">
+                        <setting string="Environmental Weight (%)">
+                            <field name="esg_weight_environmental"/>
+                        </setting>
+                        <setting string="Social Weight (%)">
+                            <field name="esg_weight_social"/>
+                        </setting>
+                        <setting string="Governance Weight (%)">
+                            <field name="esg_weight_governance"/>
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_esg_config_settings" model="ir.actions.act_window">
+        <field name="name">Settings</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="context">{'module' : 'ecosphere_esg'}</field>
+    </record>
+</odoo>

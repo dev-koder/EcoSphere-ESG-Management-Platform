@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Carbon Transaction Views -->
+    <record id="view_esg_carbon_transaction_tree" model="ir.ui.view">
+        <field name="name">esg.carbon.transaction.tree</field>
+        <field name="model">esg.carbon.transaction</field>
+        <field name="arch" type="xml">
+            <tree string="Carbon Transactions" decoration-muted="state == 'draft'">
+                <field name="date"/>
+                <field name="department_id"/>
+                <field name="source_module"/>
+                <field name="emission_factor_id"/>
+                <field name="quantity"/>
+                <field name="co2e_calculated" sum="Total CO2e"/>
+                <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-success="state == 'confirmed'"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_esg_carbon_transaction_form" model="ir.ui.view">
+        <field name="name">esg.carbon.transaction.form</field>
+        <field name="model">esg.carbon.transaction</field>
+        <field name="arch" type="xml">
+            <form string="Carbon Transaction">
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="department_id"/>
+                            <field name="date"/>
+                            <field name="source_module"/>
+                            <field name="source_reference"/>
+                        </group>
+                        <group>
+                            <field name="emission_factor_id"/>
+                            <field name="quantity"/>
+                            <field name="co2e_calculated"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <record id="view_esg_carbon_transaction_graph" model="ir.ui.view">
+        <field name="name">esg.carbon.transaction.graph</field>
+        <field name="model">esg.carbon.transaction</field>
+        <field name="arch" type="xml">
+            <graph string="Environmental Dashboard" type="bar">
+                <field name="department_id"/>
+                <field name="co2e_calculated" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_esg_carbon_transaction_pivot" model="ir.ui.view">
+        <field name="name">esg.carbon.transaction.pivot</field>
+        <field name="model">esg.carbon.transaction</field>
+        <field name="arch" type="xml">
+            <pivot string="Environmental Dashboard">
+                <field name="department_id" type="row"/>
+                <field name="date" type="col" interval="month"/>
+                <field name="co2e_calculated" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="action_esg_carbon_transaction" model="ir.actions.act_window">
+        <field name="name">Carbon Transactions</field>
+        <field name="res_model">esg.carbon.transaction</field>
+        <field name="view_mode">tree,form,graph,pivot</field>
+    </record>
+    
+    <record id="action_esg_environmental_dashboard" model="ir.actions.act_window">
+        <field name="name">Environmental Dashboard</field>
+        <field name="res_model">esg.carbon.transaction</field>
+        <field name="view_mode">pivot,graph</field>
+    </record>
+</odoo>
