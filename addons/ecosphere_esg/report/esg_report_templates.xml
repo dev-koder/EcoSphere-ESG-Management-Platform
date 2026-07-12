@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_esg_header_footer">
+        <div class="header">
+            <div class="row">
+                <div class="col-3 mb4">
+                    <img t-if="res_company.logo" t-att-src="image_data_uri(res_company.logo)" style="max-height: 45px;" alt="Logo"/>
+                </div>
+                <div class="col-9 text-right" style="margin-top:22px;" t-field="res_company.report_header" name="moto"/>
+            </div>
+            <div t-if="res_company.logo or res_company.report_header" class="row zero_min_height">
+                <div class="col-12">
+                    <div style="border-bottom: 1px solid #1f77b4;"/>
+                </div>
+            </div>
+        </div>
+        
+        <div class="article" t-att-data-oe-model="docs and docs._name" t-att-data-oe-id="docs and docs[0].id" t-att-data-oe-lang="docs and docs[0].env.context.get('lang')">
+            <t t-raw="0"/>
+        </div>
+        
+        <div class="footer o_standard_footer">
+            <div class="text-center" style="border-top: 1px solid #1f77b4;">
+                <ul class="list-inline mb4">
+                    <li t-if="res_company.phone" class="list-inline-item d-inline">Phone: <span class="o_force_ltr" t-field="res_company.phone"/></li>
+                    <li t-if="res_company.email" class="list-inline-item d-inline">Email: <span t-field="res_company.email"/></li>
+                    <li t-if="res_company.website" class="list-inline-item d-inline">Web: <span t-field="res_company.website"/></li>
+                </ul>
+                <div name="financial_infos">
+                    <span t-field="res_company.report_footer"/>
+                </div>
+                <div class="text-muted">
+                    Page: <span class="page"/> / <span class="topage"/>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="report_esg_environmental_template">
+        <t t-call="web.html_container">
+            <t t-call="ecosphere_esg.report_esg_header_footer">
+                <div class="page">
+                    <h2 style="color: #1f77b4;">Environmental Report</h2>
+                    <table class="table table-sm o_main_table">
+                        <thead>
+                            <tr>
+                                <th>Department</th>
+                                <th>Environmental Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="docs" t-as="doc">
+                                <tr>
+                                    <td><span t-field="doc.department_id.name"/></td>
+                                    <td><span t-field="doc.environmental_score"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+    
+    <template id="report_esg_social_template">
+        <t t-call="web.html_container">
+            <t t-call="ecosphere_esg.report_esg_header_footer">
+                <div class="page">
+                    <h2 style="color: #1f77b4;">Social Report</h2>
+                    <table class="table table-sm o_main_table">
+                        <thead>
+                            <tr>
+                                <th>Department</th>
+                                <th>Social Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="docs" t-as="doc">
+                                <tr>
+                                    <td><span t-field="doc.department_id.name"/></td>
+                                    <td><span t-field="doc.social_score"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+    
+    <template id="report_esg_governance_template">
+        <t t-call="web.html_container">
+            <t t-call="ecosphere_esg.report_esg_header_footer">
+                <div class="page">
+                    <h2 style="color: #1f77b4;">Governance Report</h2>
+                    <table class="table table-sm o_main_table">
+                        <thead>
+                            <tr>
+                                <th>Department</th>
+                                <th>Governance Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="docs" t-as="doc">
+                                <tr>
+                                    <td><span t-field="doc.department_id.name"/></td>
+                                    <td><span t-field="doc.governance_score"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <template id="report_esg_summary_template">
+        <t t-call="web.html_container">
+            <t t-call="ecosphere_esg.report_esg_header_footer">
+                <div class="page">
+                    <h2 style="color: #1f77b4;">ESG Summary Report</h2>
+                    <table class="table table-sm o_main_table">
+                        <thead>
+                            <tr>
+                                <th>Department</th>
+                                <th>Total Score</th>
+                                <th>E Score</th>
+                                <th>S Score</th>
+                                <th>G Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="docs" t-as="doc">
+                                <tr>
+                                    <td><span t-field="doc.department_id.name"/></td>
+                                    <td><strong><span t-field="doc.total_score"/></strong></td>
+                                    <td><span t-field="doc.environmental_score"/></td>
+                                    <td><span t-field="doc.social_score"/></td>
+                                    <td><span t-field="doc.governance_score"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

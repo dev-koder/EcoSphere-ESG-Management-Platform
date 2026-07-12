@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_esg_reward_tree" model="ir.ui.view">
+        <field name="name">esg.reward.tree</field>
+        <field name="model">esg.reward</field>
+        <field name="arch" type="xml">
+            <tree string="ESG Rewards">
+                <field name="name"/>
+                <field name="points_required"/>
+                <field name="stock"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_esg_reward_form" model="ir.ui.view">
+        <field name="name">esg.reward.form</field>
+        <field name="model">esg.reward</field>
+        <field name="arch" type="xml">
+            <form string="ESG Reward">
+                <header>
+                    <field name="status" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="points_required"/>
+                        </group>
+                        <group>
+                            <field name="stock"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description">
+                            <field name="description"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_esg_reward" model="ir.actions.act_window">
+        <field name="name">Rewards</field>
+        <field name="res_model">esg.reward</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    
+    <record id="view_esg_reward_redemption_tree" model="ir.ui.view">
+        <field name="name">esg.reward.redemption.tree</field>
+        <field name="model">esg.reward.redemption</field>
+        <field name="arch" type="xml">
+            <tree string="Reward Redemptions" create="1">
+                <field name="employee_id"/>
+                <field name="reward_id"/>
+                <field name="points_deducted"/>
+                <field name="date"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_esg_reward_redemption_form" model="ir.ui.view">
+        <field name="name">esg.reward.redemption.form</field>
+        <field name="model">esg.reward.redemption</field>
+        <field name="arch" type="xml">
+            <form string="Reward Redemption">
+                <header>
+                    <field name="status" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="employee_id"/>
+                            <field name="reward_id"/>
+                        </group>
+                        <group>
+                            <field name="points_deducted" readonly="1"/>
+                            <field name="date"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_esg_reward_redemption" model="ir.actions.act_window">
+        <field name="name">Reward Redemptions</field>
+        <field name="res_model">esg.reward.redemption</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

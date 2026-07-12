@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="cron_esg_department_score_recompute" model="ir.cron">
+            <field name="name">ESG: Recompute Department Scores (Safety Net)</field>
+            <field name="model_id" ref="model_esg_department_score"/>
+            <field name="state">code</field>
+            <field name="code">
+departments = env['esg.department'].search([])
+for d in departments:
+    env['esg.department.score'].recompute(d)
+            </field>
+            <field name="interval_number">15</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="active" eval="True"/>
+        </record>
+    </data>
+</odoo>

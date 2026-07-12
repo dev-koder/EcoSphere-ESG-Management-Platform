@@ -29,6 +29,21 @@ class EsgCarbonTransaction(models.Model):
         ('confirmed', 'Confirmed')
     ], string='Status', default='draft')
 
+    @api.model_create_multi
+    def create(self, vals_list):
+        records = super().create(vals_list)
+        for record in records:
+            if record.department_id:
+                self.env['esg.department.score'].recompute(record.department_id)
+        return records
+
+    def write(self, vals):
+        res = super().write(vals)
+        for record in self:
+            if record.department_id:
+                self.env['esg.department.score'].recompute(record.department_id)
+        return res
+
     @api.depends('quantity', 'emission_factor_id.co2e_per_unit')
     def _compute_co2e_calculated(self):
         for record in self:

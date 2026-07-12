@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_esg_badge_tree" model="ir.ui.view">
+        <field name="name">esg.badge.tree</field>
+        <field name="model">esg.badge</field>
+        <field name="arch" type="xml">
+            <tree string="ESG Badges">
+                <field name="name"/>
+                <field name="rule_type"/>
+                <field name="threshold_value"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_esg_badge_form" model="ir.ui.view">
+        <field name="name">esg.badge.form</field>
+        <field name="model">esg.badge</field>
+        <field name="arch" type="xml">
+            <form string="ESG Badge">
+                <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger" invisible="active"/>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="icon"/>
+                            <field name="active" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="rule_type"/>
+                            <field name="threshold_value"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description">
+                            <field name="description"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_esg_badge" model="ir.actions.act_window">
+        <field name="name">Badges</field>
+        <field name="res_model">esg.badge</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

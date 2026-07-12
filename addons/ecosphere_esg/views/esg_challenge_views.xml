@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_esg_challenge_tree" model="ir.ui.view">
+        <field name="name">esg.challenge.tree</field>
+        <field name="model">esg.challenge</field>
+        <field name="arch" type="xml">
+            <tree string="ESG Challenges">
+                <field name="title"/>
+                <field name="category_id"/>
+                <field name="xp"/>
+                <field name="difficulty"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_esg_challenge_form" model="ir.ui.view">
+        <field name="name">esg.challenge.form</field>
+        <field name="model">esg.challenge</field>
+        <field name="arch" type="xml">
+            <form string="ESG Challenge">
+                <header>
+                    <button name="action_activate" string="Activate" type="object" class="oe_highlight" invisible="status != 'draft'"/>
+                    <button name="action_submit_review" string="Submit for Review" type="object" invisible="status != 'active'"/>
+                    <button name="action_complete" string="Complete" type="object" invisible="status != 'under_review'"/>
+                    <button name="action_archive" string="Archive" type="object" invisible="status in ['archived', 'completed']"/>
+                    <field name="status" widget="statusbar" statusbar_visible="draft,active,completed"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="title"/>
+                            <field name="category_id"/>
+                            <field name="difficulty"/>
+                        </group>
+                        <group>
+                            <field name="xp"/>
+                            <field name="deadline"/>
+                            <field name="evidence_required"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description">
+                            <field name="description"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_esg_challenge" model="ir.actions.act_window">
+        <field name="name">Challenges</field>
+        <field name="res_model">esg.challenge</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    
+    <record id="view_esg_challenge_participation_tree" model="ir.ui.view">
+        <field name="name">esg.challenge.participation.tree</field>
+        <field name="model">esg.challenge.participation</field>
+        <field name="arch" type="xml">
+            <tree string="Challenge Participations">
+                <field name="challenge_id"/>
+                <field name="employee_id"/>
+                <field name="xp_awarded"/>
+                <field name="approval_status"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_esg_challenge_participation_form" model="ir.ui.view">
+        <field name="name">esg.challenge.participation.form</field>
+        <field name="model">esg.challenge.participation</field>
+        <field name="arch" type="xml">
+            <form string="Challenge Participation">
+                <header>
+                    <button name="action_approve" string="Approve" type="object" class="oe_highlight" invisible="approval_status != 'pending'" groups="ecosphere_esg.group_esg_manager"/>
+                    <button name="action_reject" string="Reject" type="object" invisible="approval_status != 'pending'" groups="ecosphere_esg.group_esg_manager"/>
+                    <field name="approval_status" widget="statusbar" statusbar_visible="pending,approved,rejected"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="challenge_id"/>
+                            <field name="employee_id"/>
+                            <field name="progress" widget="progressbar"/>
+                        </group>
+                        <group>
+                            <field name="xp_awarded"/>
+                            <field name="proof" widget="binary"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_esg_challenge_participation" model="ir.actions.act_window">
+        <field name="name">Challenge Participations</field>
+        <field name="res_model">esg.challenge.participation</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

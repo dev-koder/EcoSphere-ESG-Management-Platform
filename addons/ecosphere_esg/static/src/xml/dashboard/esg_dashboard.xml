@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+    <t t-name="ecosphere_esg.Dashboard" owl="1">
+        <div class="o_action_manager">
+            <div class="container-fluid py-4 esg-dashboard">
+                <div class="row mb-4">
+                    <div class="col-12 text-center">
+                        <h1 class="display-4 fw-bold">ESG Score: <t t-esc="state.data.overall_score"/></h1>
+                        <p class="text-muted">Weighted overall organizational sustainability score</p>
+                    </div>
+                </div>
+                
+                <div class="row mb-4">
+                    <div class="col-md-4">
+                        <div class="card bg-success text-white">
+                            <div class="card-body text-center">
+                                <h3>Environmental</h3>
+                                <h2><t t-esc="state.data.avg_env"/></h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bg-info text-white">
+                            <div class="card-body text-center">
+                                <h3>Social</h3>
+                                <h2><t t-esc="state.data.avg_soc"/></h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bg-warning text-dark">
+                            <div class="card-body text-center">
+                                <h3>Governance</h3>
+                                <h2><t t-esc="state.data.avg_gov"/></h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-header">Department Rankings</div>
+                            <div class="card-body" style="height: 300px;">
+                                <canvas t-ref="deptChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-header">Carbon Emission Trend</div>
+                            <div class="card-body" style="height: 300px;">
+                                <canvas t-ref="trendChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-12">
+                        <LeaderboardWidget leaderboard="state.data.leaderboard"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

@@ -43,3 +43,10 @@ class EsgComplianceIssue(models.Model):
                     summary='New Compliance Issue Assigned'
                 )
         return issues
+
+    def write(self, vals):
+        res = super().write(vals)
+        for issue in self:
+            if issue.audit_id and issue.audit_id.department_id:
+                self.env['esg.department.score'].recompute(issue.audit_id.department_id)
+        return res

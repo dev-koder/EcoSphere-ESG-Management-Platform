@@ -12,3 +12,10 @@ from . import esg_policy
 from . import esg_policy_acknowledgement
 from . import esg_audit
 from . import esg_compliance_issue
+from . import esg_badge
+from . import esg_challenge
+from . import esg_challenge_participation
+from . import esg_reward
+from . import esg_reward_redemption
+from . import esg_department_score
+from . import hr_employee

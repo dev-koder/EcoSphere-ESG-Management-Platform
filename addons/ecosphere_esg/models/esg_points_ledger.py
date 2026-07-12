@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import models, fields, api
 
 class EsgPointsLedger(models.Model):
     _name = 'esg.points.ledger'
@@ -18,3 +18,13 @@ class EsgPointsLedger(models.Model):
         ('esg.employee.participation', 'CSR Participation'),
         ('esg.reward.redemption', 'Reward Redemption')
     ], string='Reference')
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        records = super().create(vals_list)
+        for record in records:
+            if record.employee_id and record.employee_id.department_id:
+                self.env['esg.department.score'].recompute(record.employee_id.department_id)
+            if record.employee_id:
+                self.env['hr.employee']._check_badge_unlock(record.employee_id)
+        return records

@@ -17,6 +17,8 @@
     </record>
 
     <!-- App Menus -->
+    <menuitem id="menu_esg_dashboard" name="Dashboard" parent="menu_esg_root" action="action_esg_dashboard" sequence="5"/>
+
     <menuitem id="menu_esg_environmental" name="Environmental" parent="menu_esg_root" sequence="10"/>
     
     <menuitem id="menu_esg_carbon_transaction" name="Carbon Transactions" parent="menu_esg_environmental" action="action_esg_carbon_transaction" sequence="10"/>
@@ -36,6 +38,20 @@
     <menuitem id="menu_esg_audit" name="Audits" parent="menu_esg_governance" action="action_esg_audit" sequence="30"/>
     <menuitem id="menu_esg_compliance_issue" name="Compliance Issues" parent="menu_esg_governance" action="action_esg_compliance_issue" sequence="40"/>
     
+    <menuitem id="menu_esg_gamification" name="Gamification" parent="menu_esg_root" sequence="40"/>
+    <menuitem id="menu_esg_challenge" name="Challenges" parent="menu_esg_gamification" action="action_esg_challenge" sequence="10"/>
+    <menuitem id="menu_esg_challenge_participation" name="Challenge Participations" parent="menu_esg_gamification" action="action_esg_challenge_participation" sequence="20"/>
+    <menuitem id="menu_esg_badge" name="Badges" parent="menu_esg_gamification" action="action_esg_badge" sequence="30"/>
+    <menuitem id="menu_esg_reward" name="Rewards" parent="menu_esg_gamification" action="action_esg_reward" sequence="40"/>
+    <menuitem id="menu_esg_reward_redemption" name="Reward Redemptions" parent="menu_esg_gamification" action="action_esg_reward_redemption" sequence="50"/>
+
+    <menuitem id="menu_esg_reports" name="Reports" parent="menu_esg_root" sequence="50"/>
+    <menuitem id="menu_esg_report_env" name="Environmental Report" parent="menu_esg_reports" action="action_report_esg_environmental" sequence="10"/>
+    <menuitem id="menu_esg_report_soc" name="Social Report" parent="menu_esg_reports" action="action_report_esg_social" sequence="20"/>
+    <menuitem id="menu_esg_report_gov" name="Governance Report" parent="menu_esg_reports" action="action_report_esg_governance" sequence="30"/>
+    <menuitem id="menu_esg_report_sum" name="ESG Summary Report" parent="menu_esg_reports" action="action_report_esg_summary" sequence="40"/>
+    <menuitem id="menu_esg_report_builder" name="Custom Report Builder" parent="menu_esg_reports" action="action_esg_report_builder" sequence="50"/>
+
     <menuitem id="menu_esg_master_data" name="Master Data" parent="menu_esg_root" sequence="80"/>
     <menuitem id="menu_esg_department" name="Departments" parent="menu_esg_master_data" action="action_esg_department" sequence="10"/>
     <menuitem id="menu_esg_category" name="Categories" parent="menu_esg_master_data" action="action_esg_category" sequence="20"/>
