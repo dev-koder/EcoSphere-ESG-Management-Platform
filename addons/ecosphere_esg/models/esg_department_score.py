@@ -91,9 +91,9 @@ class EsgDepartmentScore(models.Model):
         gov_score = self._compute_governance_score(department)
         
         weights = {
-            'env': int(self.env['ir.config_parameter'].sudo().get_param('ecosphere_esg.esg_weight_environmental', default=40)),
-            'soc': int(self.env['ir.config_parameter'].sudo().get_param('ecosphere_esg.esg_weight_social', default=30)),
-            'gov': int(self.env['ir.config_parameter'].sudo().get_param('ecosphere_esg.esg_weight_governance', default=30))
+            'env': int(self.env['ir.config_parameter'].sudo().get_param('ecosphere_esg.esg_weight_environmental', '40') or '40'),
+            'soc': int(self.env['ir.config_parameter'].sudo().get_param('ecosphere_esg.esg_weight_social', '30') or '30'),
+            'gov': int(self.env['ir.config_parameter'].sudo().get_param('ecosphere_esg.esg_weight_governance', '30') or '30')
         }
         
         total = (env_score * weights['env'] + soc_score * weights['soc'] + gov_score * weights['gov']) / 100.0
@@ -141,9 +141,9 @@ class EsgDepartmentScore(models.Model):
         avg_gov = sum(d['gov_score'] for d in scores) / len(scores) if scores else 0
         
         weights = {
-            'env': int(self.env['ir.config_parameter'].sudo().get_param('ecosphere_esg.esg_weight_environmental', default=40)),
-            'soc': int(self.env['ir.config_parameter'].sudo().get_param('ecosphere_esg.esg_weight_social', default=30)),
-            'gov': int(self.env['ir.config_parameter'].sudo().get_param('ecosphere_esg.esg_weight_governance', default=30))
+            'env': int(self.env['ir.config_parameter'].sudo().get_param('ecosphere_esg.esg_weight_environmental', '40') or '40'),
+            'soc': int(self.env['ir.config_parameter'].sudo().get_param('ecosphere_esg.esg_weight_social', '30') or '30'),
+            'gov': int(self.env['ir.config_parameter'].sudo().get_param('ecosphere_esg.esg_weight_governance', '30') or '30')
         }
         overall = (avg_env * weights['env'] + avg_soc * weights['soc'] + avg_gov * weights['gov']) / 100.0
         
