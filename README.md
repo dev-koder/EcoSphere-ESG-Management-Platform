@@ -8,4 +8,4 @@ An open-source ESG management platform built on Odoo.
 3. Create a database named `ecosphere`. Do NOT check the demo data box (we ship our own).
 4. Go to Apps, remove the "Apps" filter, find "EcoSphere: ESG Management" and click Install.
 
-## Phase 1 Completed
+## Phase 1,2 and 3 Completed
