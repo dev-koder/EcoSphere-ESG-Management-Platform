@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- CSR Activity Views -->
+    <record id="view_esg_csr_activity_tree" model="ir.ui.view">
+        <field name="name">esg.csr.activity.tree</field>
+        <field name="model">esg.csr.activity</field>
+        <field name="arch" type="xml">
+            <tree string="CSR Activities">
+                <field name="title"/>
+                <field name="category_id"/>
+                <field name="organizing_department_id"/>
+                <field name="date"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_esg_csr_activity_form" model="ir.ui.view">
+        <field name="name">esg.csr.activity.form</field>
+        <field name="model">esg.csr.activity</field>
+        <field name="arch" type="xml">
+            <form string="CSR Activity">
+                <header>
+                    <field name="status" widget="statusbar" statusbar_visible="planned,ongoing,completed"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="title"/>
+                            <field name="category_id"/>
+                            <field name="organizing_department_id"/>
+                        </group>
+                        <group>
+                            <field name="date"/>
+                            <field name="location"/>
+                            <field name="max_participants"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description">
+                            <field name="description"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_esg_csr_activity" model="ir.actions.act_window">
+        <field name="name">CSR Activities</field>
+        <field name="res_model">esg.csr.activity</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

@@ -5,3 +5,10 @@ from . import esg_product_profile
 from . import esg_environmental_goal
 from . import esg_carbon_transaction
 from . import res_config_settings
+from . import esg_csr_activity
+from . import esg_employee_participation
+from . import esg_points_ledger
+from . import esg_policy
+from . import esg_policy_acknowledgement
+from . import esg_audit
+from . import esg_compliance_issue

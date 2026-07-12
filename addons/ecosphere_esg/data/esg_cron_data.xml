@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Daily Cron for Compliance Issues -->
+        <record id="cron_esg_compliance_issue_overdue" model="ir.cron">
+            <field name="name">ESG: Flag Overdue Compliance Issues</field>
+            <field name="model_id" ref="model_esg_compliance_issue"/>
+            <field name="state">code</field>
+            <field name="code">
+issues = env['esg.compliance.issue'].search([('status', 'in', ['open', 'in_progress']), ('due_date', '&lt;', fields.Date.today())])
+for issue in issues:
+    # Schedule activity (if not already scheduled to avoid duplicates, but for simplicity we just schedule)
+    issue.activity_schedule(
+        'mail.mail_activity_data_todo',
+        user_id=issue.owner_id.id,
+        summary='OVERDUE: Compliance Issue',
+        date_deadline=fields.Date.today()
+    )
+    issue.message_post(body="This issue is now overdue.", subtype_xmlid='mail.mt_note')
+            </field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <!-- Weekly Cron for Policy Acknowledgement Reminders -->
+        <record id="cron_esg_policy_ack_reminder" model="ir.cron">
+            <field name="name">ESG: Policy Acknowledgement Reminders</field>
+            <field name="model_id" ref="model_esg_policy_acknowledgement"/>
+            <field name="state">code</field>
+            <field name="code">
+acks = env['esg.policy.acknowledgement'].search([('status', '=', 'pending'), ('policy_id.requires_acknowledgement', '=', True)])
+for ack in acks:
+    if ack.employee_id.user_id:
+        ack.activity_schedule(
+            'mail.mail_activity_data_todo',
+            user_id=ack.employee_id.user_id.id,
+            summary='Reminder: Please acknowledge policy',
+            date_deadline=fields.Date.today()
+        )
+            </field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">weeks</field>
+            <field name="numbercall">-1</field>
+            <field name="active" eval="True"/>
+        </record>
+    </data>
+</odoo>

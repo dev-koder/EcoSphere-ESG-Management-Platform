@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Employee Participation Views -->
+    <record id="view_esg_employee_participation_tree" model="ir.ui.view">
+        <field name="name">esg.employee.participation.tree</field>
+        <field name="model">esg.employee.participation</field>
+        <field name="arch" type="xml">
+            <tree string="Employee Participation" decoration-info="approval_status == 'pending'" decoration-success="approval_status == 'approved'" decoration-danger="approval_status == 'rejected'">
+                <field name="employee_id"/>
+                <field name="activity_id"/>
+                <field name="completion_date"/>
+                <field name="points_earned"/>
+                <field name="approval_status" widget="badge" decoration-info="approval_status == 'pending'" decoration-success="approval_status == 'approved'" decoration-danger="approval_status == 'rejected'"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_esg_employee_participation_form" model="ir.ui.view">
+        <field name="name">esg.employee.participation.form</field>
+        <field name="model">esg.employee.participation</field>
+        <field name="arch" type="xml">
+            <form string="Employee Participation">
+                <header>
+                    <button name="action_approve" string="Approve" type="object" class="oe_highlight" invisible="approval_status != 'pending'" groups="ecosphere_esg.group_esg_manager"/>
+                    <button name="action_reject" string="Reject" type="object" invisible="approval_status != 'pending'" groups="ecosphere_esg.group_esg_manager"/>
+                    <field name="approval_status" widget="statusbar" statusbar_visible="pending,approved,rejected"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="employee_id"/>
+                            <field name="activity_id"/>
+                            <field name="points_earned"/>
+                        </group>
+                        <group>
+                            <field name="completion_date"/>
+                            <field name="proof" widget="binary" filename="proof_filename"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_esg_employee_participation" model="ir.actions.act_window">
+        <field name="name">Employee Participation</field>
+        <field name="res_model">esg.employee.participation</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    
+    <record id="action_esg_training_completion" model="ir.actions.act_window">
+        <field name="name">Training Completion</field>
+        <field name="res_model">esg.employee.participation</field>
+        <field name="view_mode">tree,graph,pivot</field>
+        <field name="domain">[('activity_id.category_id.category_type', '=', 'training')]</field>
+    </record>
+</odoo>

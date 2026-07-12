@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Audit Views -->
+    <record id="view_esg_audit_tree" model="ir.ui.view">
+        <field name="name">esg.audit.tree</field>
+        <field name="model">esg.audit</field>
+        <field name="arch" type="xml">
+            <tree string="ESG Audits">
+                <field name="name"/>
+                <field name="department_id"/>
+                <field name="audit_type"/>
+                <field name="scheduled_date"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_esg_audit_form" model="ir.ui.view">
+        <field name="name">esg.audit.form</field>
+        <field name="model">esg.audit</field>
+        <field name="arch" type="xml">
+            <form string="ESG Audit">
+                <header>
+                    <field name="status" widget="statusbar" statusbar_visible="planned,in_progress,completed"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="department_id"/>
+                            <field name="auditor_id"/>
+                        </group>
+                        <group>
+                            <field name="audit_type"/>
+                            <field name="scheduled_date"/>
+                            <field name="completion_date"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Findings Summary">
+                            <field name="findings_summary"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_esg_audit" model="ir.actions.act_window">
+        <field name="name">Audits</field>
+        <field name="res_model">esg.audit</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

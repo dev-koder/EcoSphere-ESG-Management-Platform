@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Compliance Issue Views -->
+    <record id="view_esg_compliance_issue_tree" model="ir.ui.view">
+        <field name="name">esg.compliance.issue.tree</field>
+        <field name="model">esg.compliance.issue</field>
+        <field name="arch" type="xml">
+            <tree string="Compliance Issues" decoration-danger="is_overdue" decoration-info="status == 'open'" decoration-success="status == 'resolved'">
+                <field name="audit_id"/>
+                <field name="description"/>
+                <field name="severity"/>
+                <field name="owner_id"/>
+                <field name="due_date"/>
+                <field name="status"/>
+                <field name="is_overdue" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_esg_compliance_issue_form" model="ir.ui.view">
+        <field name="name">esg.compliance.issue.form</field>
+        <field name="model">esg.compliance.issue</field>
+        <field name="arch" type="xml">
+            <form string="Compliance Issue">
+                <header>
+                    <field name="status" widget="statusbar" statusbar_visible="open,in_progress,resolved"/>
+                </header>
+                <sheet>
+                    <widget name="web_ribbon" title="Overdue" bg_color="bg-danger" invisible="not is_overdue"/>
+                    <group>
+                        <group>
+                            <field name="audit_id"/>
+                            <field name="severity"/>
+                        </group>
+                        <group>
+                            <field name="owner_id"/>
+                            <field name="due_date"/>
+                            <field name="is_overdue" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description">
+                            <field name="description"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_esg_compliance_issue" model="ir.actions.act_window">
+        <field name="name">Compliance Issues</field>
+        <field name="res_model">esg.compliance.issue</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

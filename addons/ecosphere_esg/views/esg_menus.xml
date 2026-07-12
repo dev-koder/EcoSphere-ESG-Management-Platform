@@ -24,6 +24,18 @@
     <menuitem id="menu_esg_environmental_goal" name="Sustainability Goals" parent="menu_esg_environmental" action="action_esg_environmental_goal" sequence="30"/>
     <menuitem id="menu_esg_emission_factor" name="Emission Factors" parent="menu_esg_environmental" action="action_esg_emission_factor" sequence="40"/>
     
+    <menuitem id="menu_esg_social" name="Social" parent="menu_esg_root" sequence="20"/>
+    <menuitem id="menu_esg_csr_activity" name="CSR Activities" parent="menu_esg_social" action="action_esg_csr_activity" sequence="10"/>
+    <menuitem id="menu_esg_employee_participation" name="Employee Participation" parent="menu_esg_social" action="action_esg_employee_participation" sequence="20"/>
+    <menuitem id="menu_esg_diversity_metrics" name="Diversity Metrics" parent="menu_esg_social" action="action_esg_diversity_metrics" sequence="30"/>
+    <menuitem id="menu_esg_training_completion" name="Training Completion" parent="menu_esg_social" action="action_esg_training_completion" sequence="40"/>
+    
+    <menuitem id="menu_esg_governance" name="Governance" parent="menu_esg_root" sequence="30"/>
+    <menuitem id="menu_esg_policy" name="Policies" parent="menu_esg_governance" action="action_esg_policy" sequence="10"/>
+    <menuitem id="menu_esg_policy_acknowledgement" name="Policy Acknowledgements" parent="menu_esg_governance" action="action_esg_policy_acknowledgement" sequence="20"/>
+    <menuitem id="menu_esg_audit" name="Audits" parent="menu_esg_governance" action="action_esg_audit" sequence="30"/>
+    <menuitem id="menu_esg_compliance_issue" name="Compliance Issues" parent="menu_esg_governance" action="action_esg_compliance_issue" sequence="40"/>
+    
     <menuitem id="menu_esg_master_data" name="Master Data" parent="menu_esg_root" sequence="80"/>
     <menuitem id="menu_esg_department" name="Departments" parent="menu_esg_master_data" action="action_esg_department" sequence="10"/>
     <menuitem id="menu_esg_category" name="Categories" parent="menu_esg_master_data" action="action_esg_category" sequence="20"/>

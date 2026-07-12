@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_hr_employee_diversity_pivot" model="ir.ui.view">
+        <field name="name">hr.employee.diversity.pivot</field>
+        <field name="model">hr.employee</field>
+        <field name="arch" type="xml">
+            <pivot string="Diversity Metrics">
+                <field name="department_id" type="row"/>
+                <field name="gender" type="col"/>
+            </pivot>
+        </field>
+    </record>
+    
+    <record id="view_hr_employee_diversity_graph" model="ir.ui.view">
+        <field name="name">hr.employee.diversity.graph</field>
+        <field name="model">hr.employee</field>
+        <field name="arch" type="xml">
+            <graph string="Diversity Metrics" type="bar">
+                <field name="department_id"/>
+                <field name="gender"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_esg_diversity_metrics" model="ir.actions.act_window">
+        <field name="name">Diversity Metrics</field>
+        <field name="res_model">hr.employee</field>
+        <field name="view_mode">pivot,graph,tree,form</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'pivot', 'view_id': ref('view_hr_employee_diversity_pivot')}),
+            (0, 0, {'view_mode': 'graph', 'view_id': ref('view_hr_employee_diversity_graph')})]"/>
+    </record>
+</odoo>

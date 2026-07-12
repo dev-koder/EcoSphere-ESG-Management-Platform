@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Policy Views -->
+    <record id="view_esg_policy_tree" model="ir.ui.view">
+        <field name="name">esg.policy.tree</field>
+        <field name="model">esg.policy</field>
+        <field name="arch" type="xml">
+            <tree string="ESG Policies">
+                <field name="name"/>
+                <field name="policy_category"/>
+                <field name="version"/>
+                <field name="effective_date"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_esg_policy_form" model="ir.ui.view">
+        <field name="name">esg.policy.form</field>
+        <field name="model">esg.policy</field>
+        <field name="arch" type="xml">
+            <form string="ESG Policy">
+                <header>
+                    <field name="status" widget="statusbar" statusbar_visible="draft,active,archived"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="policy_category"/>
+                            <field name="version"/>
+                        </group>
+                        <group>
+                            <field name="effective_date"/>
+                            <field name="review_date"/>
+                            <field name="requires_acknowledgement"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Document">
+                            <field name="document" widget="binary"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_esg_policy" model="ir.actions.act_window">
+        <field name="name">Policies</field>
+        <field name="res_model">esg.policy</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Policy Acknowledgement Views -->
+    <record id="view_esg_policy_acknowledgement_tree" model="ir.ui.view">
+        <field name="name">esg.policy.acknowledgement.tree</field>
+        <field name="model">esg.policy.acknowledgement</field>
+        <field name="arch" type="xml">
+            <tree string="Policy Acknowledgements">
+                <field name="policy_id"/>
+                <field name="employee_id"/>
+                <field name="status"/>
+                <field name="acknowledged_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_esg_policy_acknowledgement_form" model="ir.ui.view">
+        <field name="name">esg.policy.acknowledgement.form</field>
+        <field name="model">esg.policy.acknowledgement</field>
+        <field name="arch" type="xml">
+            <form string="Policy Acknowledgement">
+                <header>
+                    <button name="action_acknowledge" string="Acknowledge" type="object" class="oe_highlight" invisible="status != 'pending'"/>
+                    <field name="status" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="policy_id"/>
+                        <field name="employee_id"/>
+                        <field name="acknowledged_date"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_esg_policy_acknowledgement" model="ir.actions.act_window">
+        <field name="name">Policy Acknowledgements</field>
+        <field name="res_model">esg.policy.acknowledgement</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>
